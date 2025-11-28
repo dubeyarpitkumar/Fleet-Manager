@@ -36,10 +36,21 @@ All colors MUST be HSL.
     --input: 215 20% 88%;
     --ring: 215 30% 25%;
 
-    --status-online: 165 85% 45%;
-    --status-online-bg: 165 85% 95%;
+    --status-online: 142 70% 40%;
+    --status-online-bg: 142 70% 92%;
     --status-offline: 30 95% 55%;
     --status-offline-bg: 30 95% 95%;
+
+    --battery-high: 142 76% 36%;
+    --battery-medium: 45 93% 47%;
+    --battery-low: 25 95% 53%;
+    --battery-critical: 0 84% 60%;
+
+    --speed-safe: 142 76% 36%;
+    --speed-good: 142 70% 45%;
+    --speed-fine: 45 93% 47%;
+    --speed-caution: 30 95% 55%;
+    --speed-danger: 0 84% 60%;
 
     --radius: 0.75rem;
     
@@ -93,10 +104,21 @@ All colors MUST be HSL.
     --input: 215 25% 20%;
     --ring: 210 20% 95%;
 
-    --status-online: 165 75% 50%;
-    --status-online-bg: 165 85% 15%;
+    --status-online: 142 70% 50%;
+    --status-online-bg: 142 70% 12%;
     --status-offline: 30 85% 60%;
     --status-offline-bg: 30 95% 15%;
+
+    --battery-high: 142 76% 36%;
+    --battery-medium: 45 93% 47%;
+    --battery-low: 25 95% 53%;
+    --battery-critical: 0 84% 60%;
+
+    --speed-safe: 142 76% 36%;
+    --speed-good: 142 70% 45%;
+    --speed-fine: 45 93% 47%;
+    --speed-caution: 30 95% 55%;
+    --speed-danger: 0 84% 60%;
 
     --shadow-soft: 0 2px 8px -2px hsl(0 0% 0% / 0.3);
     --shadow-medium: 0 4px 16px -4px hsl(0 0% 0% / 0.4);
@@ -118,6 +140,51 @@ All colors MUST be HSL.
 
   body {
     @apply bg-background text-foreground font-sans antialiased;
+  }
+
+  .battery-high {
+    @apply bg-green-500/10 border-2 border-green-500/30;
+    color: hsl(var(--battery-high));
+  }
+
+  .battery-medium {
+    @apply bg-yellow-500/10 border-2 border-yellow-500/30;
+    color: hsl(var(--battery-medium));
+  }
+
+  .battery-low {
+    @apply bg-orange-500/10 border-2 border-orange-500/30;
+    color: hsl(var(--battery-low));
+  }
+
+  .battery-critical {
+    @apply bg-red-500/10 border-2 border-red-500/30 animate-pulse;
+    color: hsl(var(--battery-critical));
+  }
+
+  .speed-safe {
+    @apply bg-green-500/10 border-2 border-green-500/30;
+    color: hsl(var(--speed-safe));
+  }
+
+  .speed-good {
+    @apply bg-green-400/10 border-2 border-green-400/30;
+    color: hsl(var(--speed-good));
+  }
+
+  .speed-fine {
+    @apply bg-yellow-500/10 border-2 border-yellow-500/30;
+    color: hsl(var(--speed-fine));
+  }
+
+  .speed-caution {
+    @apply bg-orange-500/10 border-2 border-orange-500/30;
+    color: hsl(var(--speed-caution));
+  }
+
+  .speed-danger {
+    @apply bg-red-500/10 border-2 border-red-500/30 animate-pulse;
+    color: hsl(var(--speed-danger));
   }
 }
 

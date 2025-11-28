@@ -12,13 +12,13 @@ interface VehicleCardProps {
 export const VehicleCard = ({ vehicle, onClick }: VehicleCardProps) => {
   return (
     <Card
-      className="p-4 sm:p-5 cursor-pointer transition-all duration-200 hover:shadow-lg hover:scale-[1.02] active:scale-[0.98]"
+      className="p-4 sm:p-5 cursor-pointer transition-all duration-300 hover:shadow-[0_8px_30px_rgb(0,0,0,0.12)] hover:scale-[1.03] hover:-translate-y-1 active:scale-[0.98] active:translate-y-0 group animate-fade-in"
       onClick={onClick}
     >
       <div className="flex flex-col gap-3">
         <div className="flex items-start justify-between gap-2">
           <div className="flex-1 min-w-0">
-            <h3 className="font-semibold text-base sm:text-lg text-foreground truncate">
+            <h3 className="font-semibold text-base sm:text-lg text-foreground truncate transition-colors duration-300 group-hover:text-accent">
               {vehicle.vehicleName}
             </h3>
             <p className="text-xs sm:text-sm text-muted-foreground truncate">{vehicle.model}</p>

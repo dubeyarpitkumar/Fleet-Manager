@@ -16,9 +16,27 @@ interface VehicleDetailsProps {
 export const VehicleDetails = ({ vehicle, open, onClose, onEdit }: VehicleDetailsProps) => {
   if (!vehicle) return null;
 
+  const getBatteryColor = (battery: number) => {
+    if (battery >= 80) return 'battery-high';
+    if (battery >= 50) return 'battery-medium';
+    if (battery >= 20) return 'battery-low';
+    return 'battery-critical';
+  };
+
+  const getSpeedIntensity = (speed: number) => {
+    if (speed >= 80) return 'speed-danger';
+    if (speed >= 60) return 'speed-caution';
+    if (speed >= 45) return 'speed-fine';
+    if (speed >= 30) return 'speed-good';
+    return 'speed-safe';
+  };
+
+  const batteryLevel = vehicle.telemetry?.battery || 0;
+  const speedLevel = vehicle.telemetry?.speed || 0;
+
   return (
     <Dialog open={open} onOpenChange={onClose}>
-      <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
+      <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto animate-scale-in">
         <DialogHeader>
           <DialogTitle className="text-2xl">{vehicle.vehicleName}</DialogTitle>
         </DialogHeader>
@@ -71,19 +89,21 @@ export const VehicleDetails = ({ vehicle, open, onClose, onEdit }: VehicleDetail
                   Telemetry
                 </h3>
                 <div className="grid grid-cols-2 gap-4">
-                  <div className="p-4 rounded-lg bg-muted">
-                    <div className="flex items-center gap-2 mb-2">
-                      <Gauge className="w-4 h-4 text-muted-foreground" />
+                  <div className={`p-4 rounded-lg bg-muted relative overflow-hidden transition-all duration-500 hover:scale-105 ${getSpeedIntensity(speedLevel)}`}>
+                    <div className="flex items-center gap-2 mb-2 relative z-10">
+                      <Gauge className="w-4 h-4 text-muted-foreground animate-pulse" />
                       <span className="text-sm text-muted-foreground">Speed</span>
                     </div>
-                    <p className="text-2xl font-bold">{vehicle.telemetry.speed} mph</p>
+                    <p className="text-2xl font-bold relative z-10">{vehicle.telemetry.speed} mph</p>
+                    <div className="absolute inset-0 bg-gradient-to-br from-accent/10 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300" />
                   </div>
-                  <div className="p-4 rounded-lg bg-muted">
-                    <div className="flex items-center gap-2 mb-2">
-                      <Battery className="w-4 h-4 text-muted-foreground" />
+                  <div className={`p-4 rounded-lg relative overflow-hidden transition-all duration-500 hover:scale-105 ${getBatteryColor(batteryLevel)}`}>
+                    <div className="flex items-center gap-2 mb-2 relative z-10">
+                      <Battery className="w-4 h-4 animate-pulse" />
                       <span className="text-sm text-muted-foreground">Battery</span>
                     </div>
-                    <p className="text-2xl font-bold">{vehicle.telemetry.battery}%</p>
+                    <p className="text-2xl font-bold relative z-10">{vehicle.telemetry.battery}%</p>
+                    <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-current to-transparent opacity-50 animate-pulse" />
                   </div>
                 </div>
               </div>
